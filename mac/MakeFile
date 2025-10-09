@@ -1,0 +1,35 @@
+# Makefile for MAC Authentication Program
+
+# Compiler
+CC = gcc
+
+# Compiler flags
+# -Wall: Enable all warnings
+# -o: Specify the output file name
+CFLAGS = -Wall
+
+# Target executables
+TARGET_SERVER = mac_auth_server
+TARGET_CLIENT = mac_auth_client
+
+# Default target, executed when you just run `make`
+all: $(TARGET_SERVER) $(TARGET_CLIENT)
+
+# Rule to build the server
+$(TARGET_SERVER): mac_auth_server.c
+	$(CC) $(CFLAGS) -o $(TARGET_SERVER) mac_auth_server.c
+	@echo "Server executable '$(TARGET_SERVER)' created successfully."
+
+# Rule to build the client
+$(TARGET_CLIENT): mac_auth_client.c
+	$(CC) $(CFLAGS) -o $(TARGET_CLIENT) mac_auth_client.c
+	@echo "Client executable '$(TARGET_CLIENT)' created successfully."
+
+# Rule to clean up build artifacts
+clean:
+	rm -f $(TARGET_SERVER) $(TARGET_CLIENT)
+	@echo "Cleaned up build artifacts."
+
+# Phony targets are not files
+.PHONY: all clean
+
